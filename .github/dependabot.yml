@@ -8,3 +8,25 @@ updates:
     groups:
       dev-dependencies:
         dependency-type: development
+    ignore:
+      # These four are deliberately pinned below their latest major
+      # (code-generation/code-summary.md's Deviations, revision 1): the
+      # card-generation engine's peer dependencies don't declare support
+      # for react/react-dom 19 yet, and qrcode.react's SVG path geometry
+      # (lib/card/qr-vector.tsx re-embeds it inside @react-pdf/renderer's
+      # <Svg>) is exactly the kind of thing a major bump can silently
+      # change. A major-version PR for any of these needs a deliberate,
+      # tested upgrade, not an auto-opened Dependabot PR — minor/patch
+      # bumps are still proposed as normal.
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/react-dom"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "qrcode.react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@react-pdf/renderer"
+        update-types: ["version-update:semver-major"]
